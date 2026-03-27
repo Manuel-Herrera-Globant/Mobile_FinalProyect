@@ -1,15 +1,20 @@
 package com.wdio.mobile.tests;
 
+
 import com.wdio.mobile.base.BaseTest;
 import com.wdio.mobile.pages.*;
+import com.wdio.mobile.util.WaitUtils;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-//Test for the bottom navigation tabs, validating the presence of key elements in each section.
 
+/**
+ * Navegación por la barra inferior desde Home y validación de elementos clave por sección.
+ */
 public class BottomNavigationTest extends BaseTest {
+
 
     @Test
     public void homeSectionShowsExpectedContent() {
@@ -22,12 +27,14 @@ public class BottomNavigationTest extends BaseTest {
                 "Subtítulo de la app visible");
     }
 
+
     @Test
     public void webViewSectionShowsWebView() {
         tabBar.openWebView();
         WebViewPage web = new WebViewPage(driver);
         Assert.assertTrue(web.webView().isDisplayed(), "WebView presente");
     }
+
 
     @Test
     public void loginSectionShowsFormControls() {
@@ -45,6 +52,7 @@ public class BottomNavigationTest extends BaseTest {
         Assert.assertTrue(login.signUpSubmitButton().isDisplayed(), "Botón SIGN UP");
     }
 
+
     @Test
     public void formsSectionShowsExpectedWidgets() {
         tabBar.openForms();
@@ -58,13 +66,18 @@ public class BottomNavigationTest extends BaseTest {
         Assert.assertTrue(forms.inactiveButton().isDisplayed(), "Inactive");
     }
 
+
     @Test
     public void swipeSectionShowsCarousel() {
         tabBar.openSwipe();
         SwipePage swipe = new SwipePage(driver);
         Assert.assertTrue(swipe.screen().isDisplayed(), "Swipe-screen visible");
-        Assert.assertTrue(driver.findElement(AppiumBy.accessibilityId("Carousel")).isDisplayed(), "Carrusel");
+        WaitUtils.waitVisible(driver, AppiumBy.xpath("//*[contains(@resource-id,'Carousel')]"));
+        Assert.assertTrue(
+                WaitUtils.waitVisible(driver, AppiumBy.xpath("//*[@text='FULLY OPEN SOURCE']")).isDisplayed(),
+                "Primera tarjeta del carrusel visible");
     }
+
 
     @Test
     public void dragSectionShowsPuzzle() {
@@ -74,3 +87,7 @@ public class BottomNavigationTest extends BaseTest {
         Assert.assertTrue(drag.pieceTopLeft().isDisplayed(), "Pieza drag-l1");
     }
 }
+
+
+
+
