@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="WDIO Dummy App Android" verbose="1" parallel="false">
+    <test name="Automatización nativa">
+        <classes>
+            <class name="com.wdio.mobile.tests.BottomNavigationTest"/>
+            <class name="com.wdio.mobile.tests.SignUpTest"/>
+            <class name="com.wdio.mobile.tests.LoginTest"/>
+            <class name="com.wdio.mobile.tests.SwipeCardsTest"/>
+        </classes>
+    </test>
+</suite>
